@@ -43,15 +43,15 @@ Meteor.methods({
     }));
     return fut.wait();
   },
-  'spreadsheet/fetch2': function (spreadsheetName, worksheetId, options) {
-    check(spreadsheetName, String);
+  'spreadsheet/fetch2': function (spreadsheetId, worksheetId, options) {
+    check(spreadsheetId, String);
     check(worksheetId, Match.OneOf(String, Number));
     check(options, Object);
     var fut = new Future(); //don't return until we're done exporting
 
     EditGoogleSpreadsheet.load({
       //debug: true,
-      spreadsheetName: spreadsheetName,
+      spreadsheetId: spreadsheetId,
       worksheetId: worksheetId,
       oauth : {
         email: options.email,
@@ -74,8 +74,8 @@ Meteor.methods({
     });
     return fut.wait();
   },
-  'spreadsheet/update': function (spreadsheetName, worksheetId, updateObject, options) {
-    check(spreadsheetName, String);
+  'spreadsheet/update': function (spreadsheetId, worksheetId, updateObject, options) {
+    check(spreadsheetId, String);
     check(worksheetId, Match.OneOf(String, Number));
     check(updateObject, Object);
     check(options, Object);
@@ -83,7 +83,7 @@ Meteor.methods({
 
     EditGoogleSpreadsheet.load({
       //debug: true,
-      spreadsheetName: spreadsheetName,
+      spreadsheetId: spreadsheetId,
       worksheetId: worksheetId,
       oauth : {
         email: options.email,
